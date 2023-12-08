@@ -1,18 +1,16 @@
 package year2023
 
-import readInput
+import readLines
 
 fun main() {
-    val input = readInput("2023", "day01")
-    val testInputPart1 = readInput("2023", "day01_test1")
-    val testInputPart2 = readInput("2023", "day01_test2")
+    val input = readLines("2023", "day1")
+    val testInputPart1 = readLines("2023", "day1_test1")
+    val testInputPart2 = readLines("2023", "day1_test2")
 
     check(part1(testInputPart1) == 142)
-    check(part2(testInputPart2) == 281)
-
-
-
     println("Part 1:" + part1(input))
+
+    check(part2(testInputPart2) == 281)
     println("Part 2:" + part2(input))
 }
 
