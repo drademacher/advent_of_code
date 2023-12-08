@@ -10,6 +10,8 @@ fun main() {
     check(part1(testInputPart1) == 142)
     check(part2(testInputPart2) == 281)
 
+
+
     println("Part 1:" + part1(input))
     println("Part 2:" + part2(input))
 }
