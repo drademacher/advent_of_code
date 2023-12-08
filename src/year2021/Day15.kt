@@ -15,8 +15,9 @@ fun main() {
     println("Part 2:" + part2(input))
 }
 
-private fun parseInput(lines: List<String>): Day15Input = lines
-    .map { it.split("").filter { it != "" }.map { it.toInt() } }
+private fun parseInput(lines: List<String>): Day15Input =
+    lines
+        .map { it.split("").filter { it != "" }.map { it.toInt() } }
 
 private fun part1(input: List<List<Int>>): Int? {
     return searchCheapestPathToBottomRIght(input)
@@ -63,7 +64,10 @@ private fun searchCheapestPathToBottomRIght(input: List<List<Int>>): Int? {
     return null
 }
 
-private fun getOrthogonalNeighbors(input: Day15Input, point: Point): Set<Point> {
+private fun getOrthogonalNeighbors(
+    input: Day15Input,
+    point: Point,
+): Set<Point> {
     val result = mutableSetOf<Point>()
 
     if (point.x > 0) result.add(Point(point.x - 1, point.y))
@@ -76,4 +80,7 @@ private fun getOrthogonalNeighbors(input: Day15Input, point: Point): Set<Point> 
 
 private typealias Day15Input = List<List<Int>>
 
-fun List<List<Int>>.get(x: Int, y: Int) = this.getOrNull(y)?.getOrNull(x)
+fun List<List<Int>>.get(
+    x: Int,
+    y: Int,
+) = this.getOrNull(y)?.getOrNull(x)

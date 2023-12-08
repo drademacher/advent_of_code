@@ -45,7 +45,9 @@ private fun part2(input: List<Movement>): Int {
 
 sealed class Movement {
     data class Forward(val number: Int) : Movement()
+
     data class Up(val number: Int) : Movement()
+
     data class Down(val number: Int) : Movement()
 
     companion object {
@@ -56,7 +58,7 @@ sealed class Movement {
                 "forward" -> Forward(parts[1].toInt())
                 "up" -> Up(parts[1].toInt())
                 "down" -> Down(parts[1].toInt())
-                else -> throw RuntimeException("should not happen: '${string}'")
+                else -> throw RuntimeException("should not happen: '$string'")
             }
         }
     }

@@ -51,6 +51,9 @@ private fun part2(input: List<List<String>>): Int {
     return oxygenGeneratorRating[0].toBinary() * co2ScrubberRating[0].toBinary()
 }
 
-private fun mostCommonIsOne(input: List<List<String>>, i: Int) = input.filter { it[i] == "1" }.size * 2 >= input.size
+private fun mostCommonIsOne(
+    input: List<List<String>>,
+    i: Int,
+) = input.filter { it[i] == "1" }.size * 2 >= input.size
 
 private fun List<String>.toBinary(): Int = this.joinToString("").toInt(2)

@@ -4,6 +4,7 @@ import readLines
 
 fun main() {
     fun input() = parseInput(readLines("2021", "day18"))
+
     fun testInput() = parseInput(readLines("2021", "day18_test"))
 
     check(part1(testInput()) == 4140)
@@ -13,8 +14,9 @@ fun main() {
     println("Part 2:" + part2(input()))
 }
 
-private fun parseInput(lines: List<String>): List<Snailfish> = lines
-    .map { Snailfish.fromString(it) }
+private fun parseInput(lines: List<String>): List<Snailfish> =
+    lines
+        .map { Snailfish.fromString(it) }
 
 private fun part1(input: List<Snailfish>): Int {
     var acc = input.first()
@@ -37,7 +39,6 @@ private fun part2(input: List<Snailfish>): Int {
 }
 
 sealed class Snailfish() {
-
     class Number(var number: Int) : Snailfish()
 
     class Pair(var left: Snailfish, var right: Snailfish) : Snailfish()
@@ -97,7 +98,6 @@ sealed class Snailfish() {
                     parent.right = Number(0)
                 }
 
-
                 return true
             }
         }
@@ -153,10 +153,11 @@ sealed class Snailfish() {
     }
 
     val magnitude: Int
-        get() = when (this) {
-            is Number -> number
-            is Pair -> 3 * left.magnitude + 2 * right.magnitude
-        }
+        get() =
+            when (this) {
+                is Number -> number
+                is Pair -> 3 * left.magnitude + 2 * right.magnitude
+            }
 
     override fun toString(): String {
         return when (this) {
@@ -166,7 +167,10 @@ sealed class Snailfish() {
     }
 
     companion object {
-        fun add(a: Snailfish, b: Snailfish): Pair {
+        fun add(
+            a: Snailfish,
+            b: Snailfish,
+        ): Pair {
             return Pair(a, b)
         }
 
@@ -200,7 +204,7 @@ sealed class Snailfish() {
 
             return Pair(
                 fromString(string.substring(1 until split)),
-                fromString(string.substring(split + 1..string.length - 2))
+                fromString(string.substring(split + 1..string.length - 2)),
             )
         }
     }

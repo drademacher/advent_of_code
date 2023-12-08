@@ -76,4 +76,8 @@ private fun part2(input: List<String>): Long {
 }
 
 private fun isChunkOpening(c: String): Boolean = setOf("(", "[", "{", "<").contains(c)
-private fun isCorresponding(start: String, end: String) = listOf("(", "[", "{", "<").indexOf(start) == listOf(")", "]", "}", ">").indexOf(end)
+
+private fun isCorresponding(
+    start: String,
+    end: String,
+) = listOf("(", "[", "{", "<").indexOf(start) == listOf(")", "]", "}", ">").indexOf(end)

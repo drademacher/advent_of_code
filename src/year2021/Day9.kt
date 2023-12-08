@@ -35,7 +35,10 @@ private fun determineLowPoints(input: Day9Input): Set<Point> {
     return lowPoints
 }
 
-private fun getOrthogonalNeighbors(input: Day9Input, point: Point): Set<Point> {
+private fun getOrthogonalNeighbors(
+    input: Day9Input,
+    point: Point,
+): Set<Point> {
     val result = mutableSetOf<Point>()
 
     if (point.x > 0) result.add(Point(point.x - 1, point.y))
@@ -56,7 +59,10 @@ private fun part2(input: Day9Input): Int {
         .reduce { a, b -> a * b }
 }
 
-private fun findBasin(input: Day9Input, start: Point): Set<Point> {
+private fun findBasin(
+    input: Day9Input,
+    start: Point,
+): Set<Point> {
     val frontier = mutableListOf(start)
     val visited = mutableSetOf<Point>()
 

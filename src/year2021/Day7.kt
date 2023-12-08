@@ -29,4 +29,3 @@ private fun part2(input: List<Int>): Int {
 }
 
 private fun gauss(n: Int): Int = n * (n + 1) / 2
-

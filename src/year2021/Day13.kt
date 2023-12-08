@@ -18,17 +18,19 @@ fun main() {
 private fun parseInput(readText: String): Day13Input {
     val (rawPoints, rawFolds) = readText.split("\n\n")
 
-    val points = rawPoints
-        .split("\n")
-        .filter { it != "" }
-        .map { it.split(",").map { it.toInt() } }
-        .map { Point(it[0], it[1]) }
+    val points =
+        rawPoints
+            .split("\n")
+            .filter { it != "" }
+            .map { it.split(",").map { it.toInt() } }
+            .map { Point(it[0], it[1]) }
 
-    val foldInstructions = rawFolds
-        .split("\n")
-        .filter { it != "" }
-        .map { it.split(" ").last().split("=") }
-        .map { FoldInstruction(Axis.valueOf(it[0].uppercase()), it[1].toInt()) }
+    val foldInstructions =
+        rawFolds
+            .split("\n")
+            .filter { it != "" }
+            .map { it.split(" ").last().split("=") }
+            .map { FoldInstruction(Axis.valueOf(it[0].uppercase()), it[1].toInt()) }
 
     return Day13Input(Paper.fromPoints(points), foldInstructions)
 }
@@ -89,7 +91,10 @@ data class Paper(val dots: Array<Array<Boolean>>) {
 
     fun dots(): Int = dots.sumOf { it.count { it } }
 
-    fun print(x: Int = dots[0].size, y: Int = dots.size) {
+    fun print(
+        x: Int = dots[0].size,
+        y: Int = dots.size,
+    ) {
         dots
             .take(y)
             .map { it.take(x).map { if (it) "█" else " " }.joinToString("") }

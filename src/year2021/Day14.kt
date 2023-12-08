@@ -14,15 +14,17 @@ fun main() {
 }
 
 private fun parseInput(lines: List<String>): Day14Input {
-    val template = (0..lines.first().length - 2)
-        .map { "${lines.first()[it]}${lines.first()[it + 1]}" }
-        .groupBy { it }
-        .map { Pair(it.value.first(), it.value.size.toLong()) }
-        .toMap()
-    val rules = lines
-        .drop(1)
-        .map { it.split(" -> ") }
-        .associate { Pair(it[0], it[1]) }
+    val template =
+        (0..lines.first().length - 2)
+            .map { "${lines.first()[it]}${lines.first()[it + 1]}" }
+            .groupBy { it }
+            .map { Pair(it.value.first(), it.value.size.toLong()) }
+            .toMap()
+    val rules =
+        lines
+            .drop(1)
+            .map { it.split(" -> ") }
+            .associate { Pair(it[0], it[1]) }
 
     return Day14Input(template, rules)
 }
@@ -35,7 +37,10 @@ private fun part2(input: Day14Input): Long {
     return solveExtendedPolymerization(input, 40)
 }
 
-private fun solveExtendedPolymerization(input: Day14Input, steps: Int): Long {
+private fun solveExtendedPolymerization(
+    input: Day14Input,
+    steps: Int,
+): Long {
     var current = input.template.toMutableMap()
 
     repeat(steps) {
@@ -53,10 +58,11 @@ private fun solveExtendedPolymerization(input: Day14Input, steps: Int): Long {
         current = next
     }
 
-    val occurrences = current
-        .flatMap { (key, value) -> listOf(Pair(key[0], value), Pair(key[1], value)) }
-        .groupBy { it.first }
-        .map { (it.value.sumOf { it.second } + 1) / 2 }
+    val occurrences =
+        current
+            .flatMap { (key, value) -> listOf(Pair(key[0], value), Pair(key[1], value)) }
+            .groupBy { it.first }
+            .map { (it.value.sumOf { it.second } + 1) / 2 }
     return occurrences.maxOf { it } - occurrences.minOf { it }
 }
 

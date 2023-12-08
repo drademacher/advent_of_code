@@ -16,9 +16,10 @@ fun main() {
 }
 
 private fun parseInput(lines: List<String>): Day12Input {
-    val filter = lines
-        .map { line -> line.split("-") }
-        .filter { it.size == 2 }
+    val filter =
+        lines
+            .map { line -> line.split("-") }
+            .filter { it.size == 2 }
     return filter
         .fold(hashMapOf()) { acc, edge ->
             acc.putIfAbsent(edge[0], mutableListOf())
@@ -41,7 +42,12 @@ private fun part2(input: Day12Input): Int {
     return counter
 }
 
-private fun dfs(input: Day12Input, current: String, smallCavesVisited: MutableList<String>, canVisitSmallCaveTwice: Boolean) {
+private fun dfs(
+    input: Day12Input,
+    current: String,
+    smallCavesVisited: MutableList<String>,
+    canVisitSmallCaveTwice: Boolean,
+) {
     for (cave in input[current]!!) {
         var canVisitSmallCaveTwice = canVisitSmallCaveTwice
         val isSmallCave = cave[0].isLowerCase()

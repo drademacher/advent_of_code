@@ -27,7 +27,10 @@ private fun part2(input: List<List<String>>): Int {
     return input.sumOf { decodeOneInputLine(it.slice((0..9)), it.slice((10..13))) }
 }
 
-private fun decodeOneInputLine(uniqueSignals: List<String>, output: List<String>): Int {
+private fun decodeOneInputLine(
+    uniqueSignals: List<String>,
+    output: List<String>,
+): Int {
     for (a in 1..7) {
         for (b in 1..7) {
             if (b == a) continue
@@ -44,9 +47,10 @@ private fun decodeOneInputLine(uniqueSignals: List<String>, output: List<String>
 
                             val translationMapping = hashMapOf("a" to a, "b" to b, "c" to c, "d" to d, "e" to e, "f" to f, "g" to g)
 
-                            val resultOfMapping = uniqueSignals
-                                .map { signal -> toDisplay(signal, translationMapping) }
-                                .toSet()
+                            val resultOfMapping =
+                                uniqueSignals
+                                    .map { signal -> toDisplay(signal, translationMapping) }
+                                    .toSet()
 
                             if (resultOfMapping == allDisplays) {
                                 return output
@@ -65,9 +69,10 @@ private fun decodeOneInputLine(uniqueSignals: List<String>, output: List<String>
     throw IllegalStateException("Could not solve $uniqueSignals, $output")
 }
 
-private fun toDisplay(signal: String, mapping: HashMap<String, Int>) = signal.split("").filter { it != "" }.map { mapping[it]!! }.toSet()
-
-
+private fun toDisplay(
+    signal: String,
+    mapping: HashMap<String, Int>,
+) = signal.split("").filter { it != "" }.map { mapping[it]!! }.toSet()
 
 private val zero: Display = setOf(1, 2, 3, 5, 6, 7)
 private val one: Display = setOf(3, 6)
@@ -80,7 +85,7 @@ private val seven: Display = setOf(1, 3, 6)
 private val eight: Display = setOf(1, 2, 3, 4, 5, 6, 7)
 private val nine: Display = setOf(1, 2, 3, 4, 6, 7)
 private val allDisplays = setOf(zero, one, two, three, four, five, six, seven, eight, nine)
-private val displayToIntMapping = hashMapOf(zero to 0, one to 1, two to 2, three to 3, four to 4, five to 5, six to 6, seven to 7, eight to 8, nine to 9)
+private val displayToIntMapping =
+    hashMapOf(zero to 0, one to 1, two to 2, three to 3, four to 4, five to 5, six to 6, seven to 7, eight to 8, nine to 9)
 
 typealias Display = Set<Int>
-

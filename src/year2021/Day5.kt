@@ -1,9 +1,9 @@
 package year2021
 
-import java.awt.Point
 import readFile
+import java.awt.Point
 
-private const val coordinateSize = 1000
+private const val COORDINATE_SIZE = 1000
 
 fun main() {
     val input = parseInput(readFile("2021", "day5"))
@@ -27,7 +27,7 @@ private fun parseInput(file: String): List<Line> {
 }
 
 private fun part1(lines: List<Line>): Int {
-    val coords = Array(coordinateSize) { IntArray(coordinateSize) { 0 } }
+    val coords = Array(COORDINATE_SIZE) { IntArray(COORDINATE_SIZE) { 0 } }
 
     lines
         .filter { it.isHorizontalOrVertical }
@@ -38,7 +38,7 @@ private fun part1(lines: List<Line>): Int {
 }
 
 private fun part2(lines: List<Line>): Int {
-    val coords = Array(coordinateSize) { IntArray(coordinateSize) { 0 } }
+    val coords = Array(COORDINATE_SIZE) { IntArray(COORDINATE_SIZE) { 0 } }
 
     lines
         .flatMap { it.points }
@@ -51,16 +51,18 @@ class Line(private val start: Point, private val end: Point) {
     val isHorizontalOrVertical: Boolean = start.x == end.x || start.y == end.y
     val points: List<Point>
         get() {
-            val xs = if (start.x < end.x) {
-                (start.x..end.x)
-            } else {
-                (start.x downTo end.x)
-            }
-            val ys = if (start.y < end.y) {
-                (start.y..end.y)
-            } else {
-                (start.y downTo end.y)
-            }
+            val xs =
+                if (start.x < end.x) {
+                    (start.x..end.x)
+                } else {
+                    (start.x downTo end.x)
+                }
+            val ys =
+                if (start.y < end.y) {
+                    (start.y..end.y)
+                } else {
+                    (start.y downTo end.y)
+                }
 
             if (start.x == end.x) {
                 return ys.map { Point(start.x, it) }

@@ -25,7 +25,10 @@ private fun part2(input: List<Int>): Long {
     return lanternfish(input, 256)
 }
 
-private fun lanternfish(inputs: List<Int>, days: Int): Long {
+private fun lanternfish(
+    inputs: List<Int>,
+    days: Int,
+): Long {
     var current = Array(9) { 0L }
     var next: Array<Long>
 

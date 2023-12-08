@@ -20,8 +20,9 @@ private fun part1(input: List<Int>): Int {
 }
 
 private fun part2(input: List<Int>): Int {
-    val measurements = (0..input.size - 3)
-        .map { input[it] + input[it + 1] + input[it + 2] }
+    val measurements =
+        (0..input.size - 3)
+            .map { input[it] + input[it + 1] + input[it + 2] }
 
     return part1(measurements)
 }

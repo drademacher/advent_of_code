@@ -14,18 +14,20 @@ fun main() {
 }
 
 private fun parseInput(file: String): NumbersAndBoards {
-    val rawInput = file
-        .split("\n")
-        .filter { it != "" }
+    val rawInput =
+        file
+            .split("\n")
+            .filter { it != "" }
     val numbers = rawInput[0].split(",").map { it.toInt() }
-    val boards = (1 until rawInput.size step 5)
-        .map { lineIndex ->
-            Board(
-                rawInput
-                    .slice(lineIndex..lineIndex + 4)
-                    .map { line -> line.split(" ").filter { it != "" }.map { it.toInt() } }
-            )
-        }
+    val boards =
+        (1 until rawInput.size step 5)
+            .map { lineIndex ->
+                Board(
+                    rawInput
+                        .slice(lineIndex..lineIndex + 4)
+                        .map { line -> line.split(" ").filter { it != "" }.map { it.toInt() } },
+                )
+            }
     return NumbersAndBoards(numbers, boards)
 }
 
