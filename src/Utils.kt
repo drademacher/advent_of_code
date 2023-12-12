@@ -33,3 +33,5 @@ fun getPrimesBelow(n: Int): List<Int> {
 }
 
 fun powerOfTwo(n: Int) = 1 shl n
+
+fun nthRightBinaryDigitIsOne(x: Int, n: Int) = x and (1 shl n) != 0
