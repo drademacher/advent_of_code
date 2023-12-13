@@ -35,3 +35,31 @@ fun getPrimesBelow(n: Int): List<Int> {
 fun powerOfTwo(n: Int) = 1 shl n
 
 fun nthRightBinaryDigitIsOne(x: Int, n: Int) = x and (1 shl n) != 0
+
+data class Grid<T>(
+    val data: List<List<T>>,
+    val rows: Int = data.size,
+    val cols: Int = data[0].size
+) {
+    init {
+        if (!data.all { it.size == cols }) {
+            throw IllegalStateException("invalid grid with different sized rows")
+        }
+    }
+
+    fun nthRow(n: Int): List<T> {
+        if (n < 1 || n > rows) {
+            throw IllegalArgumentException("Invalid parameter $n: should be in 1..$rows")
+        }
+
+        return data[n - 1]
+    }
+
+    fun nthCol(n: Int): List<T> {
+        if (n < 1 || n > cols) {
+            throw IllegalArgumentException("Invalid parameter $n: should be in 1..$cols")
+        }
+
+        return data.map { it[n - 1] }
+    }
+}
