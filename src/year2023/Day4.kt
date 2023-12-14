@@ -20,7 +20,7 @@ private fun parseInput(input: List<String>): List<Card> {
         .map {
             Card(
                 it[1].split(" ").filter { it != "" }.map(String::toInt),
-                it[2].split(" ").filter { it != "" }.map(String::toInt)
+                it[2].split(" ").filter { it != "" }.map(String::toInt),
             )
         }
 }
@@ -50,4 +50,3 @@ private fun part2(input: List<Card>): Int {
 }
 
 private data class Card(val winningNumbers: List<Int>, val numbers: List<Int>)
-

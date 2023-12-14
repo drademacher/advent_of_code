@@ -7,7 +7,6 @@ fun main() {
     val input = parseInput(readLines("2023", "day13"))
     val testInput = parseInput(readLines("2023", "day13_test"))
 
-
     check(part1(testInput) == 405)
     println("Part 1:" + part1(input))
 
@@ -29,7 +28,11 @@ private fun parseInput(input: List<String>): List<Grid<Char>> {
 }
 
 private fun part1(patterns: List<Grid<Char>>): Int {
-    val x = patterns.map { pattern -> (isHorizontallyMirrored(pattern).firstOrNull()?.let { it * 100 }) ?: isVerticallyMirrored(pattern).first() }
+    val x =
+        patterns.map {
+                pattern ->
+            (isHorizontallyMirrored(pattern).firstOrNull()?.let { it * 100 }) ?: isVerticallyMirrored(pattern).first()
+        }
 
     return x.sum()
 }
@@ -51,7 +54,6 @@ private fun part2(patterns: List<Grid<Char>>): Int {
             }
         }.first()
     }.sum()
-
 
     return 0
 }
@@ -75,7 +77,6 @@ private fun isVerticallyMirrored(pattern: Grid<Char>): List<Int> {
 }
 
 private fun Grid<Char>.allFlips(): List<Grid<Char>> {
-
     return (1..rows).map { row ->
         (1..cols).map { col ->
             this.flip(row, col)
@@ -83,20 +84,24 @@ private fun Grid<Char>.allFlips(): List<Grid<Char>> {
     }.flatten()
 }
 
-private fun Grid<Char>.flip(col: Int, row: Int): Grid<Char> {
-    val newData = data.mapIndexed { y, chars ->
-        if (y == row - 1) {
-            chars.mapIndexed { x, char ->
-                if (x == col - 1) {
-                    if (char == '.') '#' else '.'
-                } else {
-                    char
+private fun Grid<Char>.flip(
+    col: Int,
+    row: Int,
+): Grid<Char> {
+    val newData =
+        data.mapIndexed { y, chars ->
+            if (y == row - 1) {
+                chars.mapIndexed { x, char ->
+                    if (x == col - 1) {
+                        if (char == '.') '#' else '.'
+                    } else {
+                        char
+                    }
                 }
+            } else {
+                chars
             }
-        } else {
-            chars
         }
-    }
 
     return Grid(newData)
 }

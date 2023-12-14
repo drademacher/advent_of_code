@@ -2,10 +2,10 @@ fun main() {
     val input = parseInput(readLines("2023", "day"))
     val testInput = parseInput(readLines("2023", "day_test"))
 
-    check(part1(testInput) == 0)
+    check(part1(testInput) == 0) { "Incorrect result for part 1: ${part1(testInput)}" }
     println("Part 1:" + part1(input))
 
-    check(part2(testInput) == 0)
+    check(part2(testInput) == 0) { "Incorrect result for part 2: ${part2(testInput)}" }
     println("Part 2:" + part2(input))
 }
 

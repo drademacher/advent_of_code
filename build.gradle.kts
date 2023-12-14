@@ -17,6 +17,6 @@ tasks {
 
 spotless {
     kotlin {
-        ktlint("1.0.1")
+        ktlint("1.0.1").editorConfigOverride(mapOf("max-line-length" to 200))
     }
 }

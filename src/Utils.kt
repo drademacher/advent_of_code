@@ -34,12 +34,15 @@ fun getPrimesBelow(n: Int): List<Int> {
 
 fun powerOfTwo(n: Int) = 1 shl n
 
-fun nthRightBinaryDigitIsOne(x: Int, n: Int) = x and (1 shl n) != 0
+fun nthRightBinaryDigitIsOne(
+    x: Int,
+    n: Int,
+) = x and (1 shl n) != 0
 
 data class Grid<T>(
     val data: List<List<T>>,
     val rows: Int = data.size,
-    val cols: Int = data[0].size
+    val cols: Int = data[0].size,
 ) {
     init {
         if (!data.all { it.size == cols }) {

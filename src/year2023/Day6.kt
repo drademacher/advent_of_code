@@ -27,10 +27,11 @@ private fun part1(input: List<String>): Int {
         val time = times[i]
         val distanceToBeat = distancesToBeat[i]
 
-        val distances = (1..time)
-            .map { x -> (time - x) * x }
-            .filter { distance -> distance > distanceToBeat }
-            .size
+        val distances =
+            (1..time)
+                .map { x -> (time - x) * x }
+                .filter { distance -> distance > distanceToBeat }
+                .size
 
         result *= distances
     }
@@ -45,7 +46,10 @@ private fun part2(input: List<String>): Int {
     return distancesOverThreshold(time, distanceToBeat).toInt()
 }
 
-private fun distancesOverThreshold(time: Long, distanceThreshold: Long): Long {
+private fun distancesOverThreshold(
+    time: Long,
+    distanceThreshold: Long,
+): Long {
     fun distance(x: Long) = (time - x) * x
 
     fun distanceOverThreshold(x: Long) = distance(x) >= distanceThreshold
@@ -61,7 +65,10 @@ private fun distancesOverThreshold(time: Long, distanceThreshold: Long): Long {
         return result
     }
 
-    fun binarySearchForBoundaryTime(left: Long, right: Long): Long {
+    fun binarySearchForBoundaryTime(
+        left: Long,
+        right: Long,
+    ): Long {
         if (right - left < 50L) {
             return if (distanceOverThreshold(right)) {
                 (left..right).first { distanceOverThreshold(it) }
