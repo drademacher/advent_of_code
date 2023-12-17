@@ -1,5 +1,6 @@
 package year2023
 
+import Direction
 import Grid
 import Point
 import readLines
@@ -60,7 +61,7 @@ private data class State(val point: Point, val fromDirection: Direction, val cos
     fun generateAllValidNextStates(grid: Grid<Int>, minStraightMoves: Int, maxStraightMoves: Int): List<State> {
         val neighbors = mutableListOf<State>()
 
-        for (direction in fromDirection.ninetyDegree()) {
+        for (direction in fromDirection.orthogonalDirections()) {
             var newCost = 0
             var newPoint = point
             for (amount in (1..maxStraightMoves)) {
@@ -81,23 +82,7 @@ private data class State(val point: Point, val fromDirection: Direction, val cos
     }
 }
 
-private enum class Direction {
-    NORTH,
-    EAST,
-    SOUTH,
-    WEST,
-    ;
-
-    fun ninetyDegree() = when (this) {
-        NORTH, SOUTH -> listOf(EAST, WEST)
-        EAST, WEST -> listOf(NORTH, SOUTH)
-    }
-
-    fun toPoint() =
-        when (this) {
-            NORTH -> Point(0, -1)
-            EAST -> Point(1, 0)
-            SOUTH -> Point(0, 1)
-            WEST -> Point(-1, 0)
-        }
+private fun Direction.orthogonalDirections() = when (this) {
+    Direction.NORTH, Direction.SOUTH -> listOf(Direction.EAST, Direction.WEST)
+    Direction.EAST, Direction.WEST -> listOf(Direction.NORTH, Direction.SOUTH)
 }

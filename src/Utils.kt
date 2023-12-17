@@ -40,59 +40,23 @@ fun nthRightBinaryDigitIsOne(
     n: Int,
 ) = x and (1 shl n) != 0
 
-data class Grid<T>(
-    val data: List<List<T>>,
-    val rows: Int = data.size,
-    val cols: Int = data[0].size,
-) {
-    init {
-        if (!data.all { it.size == cols }) {
-            throw IllegalStateException("invalid grid with different sized rows")
-        }
-    }
-
-    fun nthRow(n: Int): List<T> {
-        if (n < 0 || n > rows - 1) {
-            throw IllegalArgumentException("Invalid parameter $n: should be in 0..<$rows")
-        }
-
-        return data[n]
-    }
-
-    fun nthCol(n: Int): List<T> {
-        if (n < 0 || n > cols - 1) {
-            throw IllegalArgumentException("Invalid parameter $n: should be in 0..<$cols")
-        }
-
-        return data.map { it[n] }
-    }
-
-    fun orthogonalNeighbors(y: Int, x: Int): List<T> {
-        val neighbors = mutableListOf<T>()
-
-        if (y > 0) {
-            neighbors.add(data[y - 1][x])
-        }
-
-        if (y + 1 < rows) {
-            neighbors.add(data[y + 1][x])
-        }
-
-        if (x > 0) {
-            neighbors.add(data[y][x - 1])
-        }
-
-        if (x + 1 < cols) {
-            neighbors.add(data[y][x + 1])
-        }
-
-        return neighbors
-    }
-
-    fun getOrNull(x: Int, y: Int) = data.getOrNull(y)?.getOrNull(x)
-}
-
 data class Point(val x: Int, val y: Int) {
     fun add(other: Point): Point = Point(this.x + other.x, this.y + other.y)
     fun manhattenDistance(other: Point) = abs(x - other.x) + abs(y - other.y)
+}
+
+enum class Direction {
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST,
+    ;
+
+    fun toPoint() =
+        when (this) {
+            NORTH -> Point(0, -1)
+            EAST -> Point(1, 0)
+            SOUTH -> Point(0, 1)
+            WEST -> Point(-1, 0)
+        }
 }
