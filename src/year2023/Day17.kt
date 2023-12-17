@@ -5,7 +5,6 @@ import Point
 import readLines
 import java.util.PriorityQueue
 
-// TODO: very slow solution for no obvious reason
 fun main() {
     val input = parseInput(readLines("2023", "day17"))
     val testInput = parseInput(readLines("2023", "day17_test"))
@@ -32,12 +31,13 @@ private fun part2(grid: Grid<Int>): Int {
 private fun solve(grid: Grid<Int>, minStraightMoves: Int, maxStraightMoves: Int): Int {
     val goal = Point(grid.cols - 1, grid.rows - 1)
 
-    val visited = mutableListOf<Pair<Point, Direction>>()
+    val visited = mutableSetOf<Pair<Point, Direction>>()
     val frontier = PriorityQueue<State>(compareBy<State> { it.costSoFar }.thenBy { it.point.manhattenDistance(goal) }).also { queue ->
         queue.addAll(Direction.entries.map { State(Point(0, 0), it, 0) })
     }
 
     while (frontier.isNotEmpty()) {
+        frontier.peek()
         val state = frontier.remove()
         val point = state.point
 
@@ -65,6 +65,11 @@ private data class State(val point: Point, val fromDirection: Direction, val cos
             var newPoint = point
             for (amount in (1..maxStraightMoves)) {
                 newPoint = newPoint.add(direction.toPoint())
+                val newPointIsValid = newPoint.x >= 0 && newPoint.x < grid.cols && newPoint.y >= 0 && newPoint.y < grid.rows
+                if (!newPointIsValid) {
+                    break
+                }
+
                 newCost += grid.getOrNull(newPoint.x, newPoint.y) ?: 0
                 if (amount >= minStraightMoves) {
                     neighbors.add(State(newPoint, direction, costSoFar + newCost))
@@ -72,7 +77,7 @@ private data class State(val point: Point, val fromDirection: Direction, val cos
             }
         }
 
-        return neighbors.filter { it.point.x >= 0 && it.point.x < grid.cols && it.point.y >= 0 && it.point.y < grid.rows }
+        return neighbors
     }
 }
 
