@@ -1,6 +1,7 @@
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import kotlin.math.abs
 import kotlin.math.sqrt
 
 fun readLines(
@@ -65,4 +66,33 @@ data class Grid<T>(
 
         return data.map { it[n - 1] }
     }
+
+    fun orthogonalNeighbors(y: Int, x: Int): List<T> {
+        val neighbors = mutableListOf<T>()
+
+        if (y > 0) {
+            neighbors.add(data[y - 1][x])
+        }
+
+        if (y + 1 < rows) {
+            neighbors.add(data[y + 1][x])
+        }
+
+        if (x > 0) {
+            neighbors.add(data[y][x - 1])
+        }
+
+        if (x + 1 < cols) {
+            neighbors.add(data[y][x + 1])
+        }
+
+        return neighbors
+    }
+
+    fun getOrNull(x: Int, y: Int) = data.getOrNull(y)?.getOrNull(x)
+}
+
+data class Point(val x: Int, val y: Int) {
+    fun add(other: Point): Point = Point(this.x + other.x, this.y + other.y)
+    fun manhattenDistance(other: Point) = abs(x - other.x) + abs(y - other.y)
 }
