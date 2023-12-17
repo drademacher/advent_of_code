@@ -41,7 +41,6 @@ private fun solve(grid: Grid<Int>, minStraightMoves: Int, maxStraightMoves: Int)
         val state = frontier.remove()
         val point = state.point
 
-
         if (point == goal) {
             return state.costSoFar
         }
@@ -78,7 +77,11 @@ private data class State(val point: Point, val fromDirection: Direction, val cos
 }
 
 private enum class Direction {
-    NORTH, EAST, SOUTH, WEST;
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST,
+    ;
 
     fun ninetyDegree() = when (this) {
         NORTH, SOUTH -> listOf(EAST, WEST)

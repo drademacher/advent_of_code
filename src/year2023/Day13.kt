@@ -62,7 +62,7 @@ private fun isHorizontallyMirrored(pattern: Grid<Char>): List<Int> {
     return (1..<pattern.rows).filter { mirror ->
         (1..mirror).all { row ->
             val mirroredRow = 2 * mirror - row + 1
-            mirroredRow > pattern.rows || pattern.nthRow(row) == pattern.nthRow(mirroredRow)
+            mirroredRow > pattern.rows || pattern.nthRow(row - 1) == pattern.nthRow(mirroredRow - 1)
         }
     }
 }
@@ -71,7 +71,7 @@ private fun isVerticallyMirrored(pattern: Grid<Char>): List<Int> {
     return (1..<pattern.cols).filter { mirror ->
         (1..mirror).all { col ->
             val mirroredCol = 2 * mirror - col + 1
-            mirroredCol > pattern.cols || pattern.nthCol(col) == pattern.nthCol(mirroredCol)
+            mirroredCol > pattern.cols || pattern.nthCol(col - 1) == pattern.nthCol(mirroredCol - 1)
         }
     }
 }

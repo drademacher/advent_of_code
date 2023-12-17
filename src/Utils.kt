@@ -52,19 +52,19 @@ data class Grid<T>(
     }
 
     fun nthRow(n: Int): List<T> {
-        if (n < 1 || n > rows) {
-            throw IllegalArgumentException("Invalid parameter $n: should be in 1..$rows")
+        if (n < 0 || n > rows - 1) {
+            throw IllegalArgumentException("Invalid parameter $n: should be in 0..<$rows")
         }
 
-        return data[n - 1]
+        return data[n]
     }
 
     fun nthCol(n: Int): List<T> {
-        if (n < 1 || n > cols) {
-            throw IllegalArgumentException("Invalid parameter $n: should be in 1..$cols")
+        if (n < 0 || n > cols - 1) {
+            throw IllegalArgumentException("Invalid parameter $n: should be in 0..<$cols")
         }
 
-        return data.map { it[n - 1] }
+        return data.map { it[n] }
     }
 
     fun orthogonalNeighbors(y: Int, x: Int): List<T> {
